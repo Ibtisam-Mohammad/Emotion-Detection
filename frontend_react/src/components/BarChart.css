@@ -1,0 +1,144 @@
+.plot--container{
+    margin-top: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 20px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.plot{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.plots{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.sentence{
+  width: 500px;
+  text-align: center;
+}
+
+.audio-table-headers{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 100px;
+  text-align: center;
+  margin-top: 10px;
+  border-bottom: 2px solid #151B54;
+  border-top: 2px solid #151B54;
+  border-right: 2px solid #151B54;
+}
+.audio-table-header{
+  border-left: 2px solid #151B54;
+  font-size: 22px;
+  text-align: center;
+}
+.audio-table-items{
+
+  display: flex;
+  flex-direction: row;
+  font-size: 20px;
+  flex-wrap: wrap;
+  gap: 100px;
+  text-align: center;
+  /* margin-top: 10px; */
+  border-bottom: 1px solid #151B54;
+  border-top: 1px solid #151B54;
+  border-right: 1px solid #151B54;
+ 
+}
+.audio-table-item{
+  border-left: 1px solid #151B54;
+}
+.audio-table{
+
+  margin: 20px;
+  padding: 10px;
+}
+
+.interval{
+  width:100px;
+  text-align: center;
+}
+
+.count{
+  width: 200px;
+  text-align: center;
+}
+
+.sentiment{
+  width: 200px;
+  text-align: center;
+}
+
+
+h3{
+    text-align: center;
+    color: #151B54;
+}
+.chart-headings{
+  font-size: 2rem;
+}
+h2{
+  text-align: center;
+  color: #151B54;
+
+}
+
+p{
+    font-weight: 1px;
+    text-align: justify;
+}
+
+.interpreation{
+
+margin-top: 10ppx;
+padding-top: 10px;
+
+}
+
+p{
+  padding-top: 5px ;
+}
+
+.speech-analysis{
+  margin-top: 10ppx;
+  padding-top: 10px;
+ 
+}
+
+@media screen and (max-width: 960px) {
+    .heading {
+      font-size: 70px;
+      margin-top: -150px;
+    }
+    .plots{
+        flex-direction: column;
+    }
+  }
+  
+  @media screen and (max-width: 768px) {
+    .heading {
+      font-size: 50px;
+      margin-top: -100px;
+    }
+    .plots{
+      flex-direction: column;
+
+  }
+    .plot--container{
+
+        flex-direction: column;
+    }
+
+  
+  }

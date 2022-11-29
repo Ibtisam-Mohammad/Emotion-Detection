@@ -1,0 +1,225 @@
+.results--container {
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+body {
+    font-family: 'lato', sans-serif;
+}
+
+
+
+
+.table--container {
+    margin: 20px 40px 10px 40px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+
+}
+
+h2 {
+    font-size: 26px;
+    margin: 20px 0;
+    text-align: center;
+    /* small {
+    font-size: 0.5em;
+}
+} */
+}
+
+.header--container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.value--container {
+    display: flex;
+    flex-direction: column;
+}
+
+.value--item{
+    display: flex;
+
+    padding: 10px 5px 10px 5px;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.value--header{
+    text-align: center;
+}
+
+table {
+    border-spacing: 1;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 6px;
+    overflow: hidden;
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+  }
+  table * {
+    position: relative;
+  }
+  table td, table th {
+    padding-left: 8px;
+  }
+  table thead tr {
+    height: 60px;
+    background: #FFED86;
+    font-size: 16px;
+  }
+  table tbody tr {
+    height: 48px;
+    border-bottom: 1px solid #E3F1D5;
+  }
+  table tbody tr:last-child {
+    border: 0;
+  }
+  table td, table th {
+    text-align: left;
+  }
+  table td.l, table th.l {
+    text-align: right;
+  }
+  table td.c, table th.c {
+    text-align: center;
+  }
+  table td.r, table th.r {
+    text-align: center;
+  }
+  
+  @media screen and (max-width: 35.5em) {
+    table {
+      display: block;
+    }
+    table > *, table tr, table td, table th {
+      display: block;
+    }
+    table thead {
+      display: none;
+    }
+    table tbody tr {
+      height: auto;
+      padding: 8px 0;
+    }
+    table tbody tr td {
+      padding-left: 45%;
+      margin-bottom: 12px;
+    }
+    table tbody tr td:last-child {
+      margin-bottom: 0;
+    }
+    table tbody tr td:before {
+      position: absolute;
+      font-weight: 700;
+      width: 40%;
+      left: 10px;
+      top: 0;
+    }
+    table tbody tr td:nth-child(1):before {
+      content: "Code";
+    }
+    table tbody tr td:nth-child(2):before {
+      content: "Stock";
+    }
+    table tbody tr td:nth-child(3):before {
+      content: "Cap";
+    }
+    table tbody tr td:nth-child(4):before {
+      content: "Inch";
+    }
+    table tbody tr td:nth-child(5):before {
+      content: "Box Type";
+    }
+  }
+
+  
+  blockquote {
+    color: white;
+    text-align: center;
+  }
+
+
+  /* ##################  New Gallery Css ########################   */
+
+.gallery-container{
+  margin:50px;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.thumbnail{
+  width: 100%;
+}
+
+.tile-container{
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.tile-title-container{
+  /* margin:10px; */
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  justify-content: center;
+  text-align: center;
+}
+
+.video-title{
+  text-align: center;
+  margin-bottom: 2px;
+  font-size: 1.3rem;
+  /* padding: 5px; */
+}
+
+.link{
+  margin: 10px;
+  text-decoration: none;
+  color: #000;
+  text-align: center;
+  /* border: 4px solid black; */
+  /* padding:5px; */
+}
+
+
+
+.link:hover{
+  color: #151B54;
+  font-size:1.1rem;
+  transition: ease-out;
+}
+
+
+@media screen and (max-width: 960px) {
+
+  
+.gallery-container{
+  flex-direction: column;
+  align-items: center;
+  gap:50px;
+}
+  
+}
+
+@media screen and (max-width: 1200px) {
+
+  
+  .gallery-container{
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+  }
+    
+  }
