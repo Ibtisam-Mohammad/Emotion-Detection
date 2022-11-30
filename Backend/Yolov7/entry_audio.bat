@@ -1,0 +1,1 @@
+docker run -it --rm --mount type=bind,source="E:\Projects\AI-5\Audio\OpenAI-ASR",target=/app --gpus all asr

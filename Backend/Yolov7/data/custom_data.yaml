@@ -1,0 +1,9 @@
+# train and val data as 1) directory: path/images/, 2) file: path/images.txt, or 3) list: [path1/images/, path2/images/]
+train: E:\Projects\AI-5\Haar Cascade test\data_face\DATA\train
+val: E:\Projects\AI-5\Haar Cascade test\data_face\DATA\val
+
+# number of classes
+nc: 8
+
+# class names
+names: ['anger', 'contempt', 'disgust', 'fear', 'happy', 'neutral', 'sad', 'surprise']
