@@ -2,7 +2,7 @@ import cv2 as cv2
 import datetime
 import numpy as np
 import os 
-from .bucket import upload_blob, upload_blob_from_memory
+from app.bucket import upload_blob, upload_blob_from_memory
 
 bucket_name = 'edaa_bucket'
 

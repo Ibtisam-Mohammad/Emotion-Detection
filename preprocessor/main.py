@@ -1,14 +1,18 @@
-from utils.video import *
+import imageio
+import sys
+# sys.path.append("./")
+import app.video as video
 from multiprocessing import Pool
-from utils.bucket import *
+import app.bucket as bucket
 import requests
 from pydantic import BaseModel
-from utils.audio import *
+import app.audio as audio
 from google.cloud import storage
 import moviepy.editor as mp 
 import base64
 import glob
 import io
+import json
 from fastapi.responses import FileResponse
 from fastapi import FastAPI, Form,  File, UploadFile, Response
 from fastapi.middleware.cors import CORSMiddleware
@@ -69,9 +73,8 @@ async def root():
     return {'message': "Welcome To EDAA"}
 
 @app.post('/video')
-async def process_video(data: UploadFile = File()):
+async def process_video(data: UploadFile = File(None)):
     global finalFileName
-    #Hemani is very excited
     array = data.file.read()
     filename = data.filename
     finalFileName = filename[:-4]
@@ -81,12 +84,12 @@ async def process_video(data: UploadFile = File()):
         f.write(array)
     try:
         #Extract audio and create Chunks
-        audio_utils = AudioTools('audio/')
+        audio_utils = audio.AudioTools('audio/')
         fileName = audio_utils.extract_audio(filename[:-4], filename)
         audio = audio_utils.read_audio(fileName)
         audio_chunks = audio_utils.create_chunks(audio)
         a_c = {'audio': audio_chunks}
-        upload_blob_from_memory(
+        bucket.upload_blob_from_memory(
             'edaa_bucket',
             contents= json.dumps(a_c, indent=4),
             destination_blob_name= f'audio_chunks/{filename[:-4]}.json'
@@ -99,7 +102,7 @@ async def process_video(data: UploadFile = File()):
         #Create Video Chunks
         pool = Pool(processes=1) 
 
-        result = pool.apply_async(generate_video_chunks, [filename], callback=make_yolo_post_call)
+        result = pool.apply_async(video.generate_video_chunks, [filename], callback=make_yolo_post_call)
 
         return {'status':  True}
     except Exception as error:
@@ -115,7 +118,7 @@ async def get_result_names():
 
     names = []
 
-    thumbnails = list_blobs_with_prefix('thumbnail')
+    thumbnails = bucket.list_blobs_with_prefix('thumbnail')
 
     result = {}
 
@@ -132,7 +135,7 @@ async def get_thumbnail(data:Item):
 
     filename = data.filename
 
-    thumbnails = download_blob_into_memory(filename)
+    thumbnails = bucket.download_blob_into_memory(filename)
     thumbnails = base64.b64encode(thumbnails)
 
 
@@ -154,7 +157,7 @@ async def get_results(data:Item):
 
     filename = data.filename
     ### Get All Available results
-    all_results_list  = list_blobs_with_prefix('results')
+    all_results_list  = bucket.list_blobs_with_prefix('results')
 
     for name in all_results_list:
         if name.find('audio')>=0 and name.find(filename)>=0:
@@ -162,8 +165,8 @@ async def get_results(data:Item):
         if name.find('video')>=0 and name.find(filename)>=0:
             video_result_name = name
         
-    audio_result = json.loads(download_blob_into_memory(audio_result_name))
-    video_result = json.loads(download_blob_into_memory(video_result_name))
+    audio_result = json.loads(bucket.download_blob_into_memory(audio_result_name))
+    video_result = json.loads(bucket.download_blob_into_memory(video_result_name))
     print(video_result)
 
     ##### CHART 2 ######

@@ -2,6 +2,7 @@ import { useEffect, React, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Upload.css";
 import axios from "axios";
+const BASE_API_URL = process.env.REACT_APP_BASE_API_URL;
 
 function Upload() {
   const [email, setEmail] = useState("");
@@ -24,7 +25,7 @@ function Upload() {
     formData.append("data", e.target.files[0]);
     axios({
       method: "post",
-      url: "http://127.0.0.1:80/video",
+      url: `${BASE_API_URL}/video`,
       data: formData,
       headers: {
         "Content-Type": "multipart/form-data",

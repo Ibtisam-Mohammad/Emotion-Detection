@@ -4,7 +4,7 @@ from google.cloud import storage
 import os
 import json
 
-credential_path = "utils\secrets.json"
+credential_path = "app/secrets.json"
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = credential_path
 
 storage_client = storage.Client.from_service_account_json(credential_path)
