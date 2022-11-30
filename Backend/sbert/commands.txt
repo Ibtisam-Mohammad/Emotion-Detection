@@ -1,0 +1,1 @@
+docker run --rm -it -p 8081:8081 --mount type=bind,source="E:\Projects\AI-5\Audio\sbert",target=/app sbert
