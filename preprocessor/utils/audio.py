@@ -47,7 +47,7 @@ class AudioTools():
             initial+=1
             stop+=CHUNK_SIZE * SAMPLING_RATE
 
-        return np.asarray(chunks)
+        return chunks
 
 
 
