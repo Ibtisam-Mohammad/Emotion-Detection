@@ -1,0 +1,1 @@
+docker run -it --rm --mount type=bind,source="D:\Yolov7\YOLO",target=/app yolo
