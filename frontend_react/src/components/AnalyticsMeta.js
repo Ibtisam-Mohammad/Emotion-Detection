@@ -31,7 +31,7 @@ function AnalyticsMeta(props) {
 
         <div className="item">
           <span className="metaheaders">User</span>
-          <span className="metavalue">pleaseProvideMarks@Dedo.com</span>
+          <span className="metavalue">themysticforcess007@gmail.com</span>
         </div>
 
         
