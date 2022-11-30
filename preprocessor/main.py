@@ -40,17 +40,27 @@ class Item(BaseModel):
     filename: str
 
 
-def make_yolo_call(filename:str):
-    url = 'http://127.0.0.1:8989/process'
+def make_post_call(url, filename:str):
+    url = url
     json = {
         'filename':filename[:-4]
     }
     x = requests.post(url, json = json)
     if x.status == 200:
-        print('Successfully Made YOLO Call')
+        print('Successfully Made Post Call')
     else:
         print('Request Unsuccessful:', x.status)
 
+def make_yolo_post_call():
+    url = 'http://localhost:9000/predict_video'
+    json = {
+        'filename':finalFileName
+    }
+    x = requests.post(url, json = json)
+    if x.status == 200:
+        print('Successfully Made Post Call')
+    else:
+        print('Request Unsuccessful:', x.status)
 
 
 
@@ -60,10 +70,11 @@ async def root():
 
 @app.post('/video')
 async def process_video(data: UploadFile = File()):
-
+    global finalFileName
     #Hemani is very excited
     array = data.file.read()
     filename = data.filename
+    finalFileName = filename[:-4]
 
     #Write File to memory
     with open(f'{filename}', 'wb') as f:
@@ -74,19 +85,28 @@ async def process_video(data: UploadFile = File()):
         fileName = audio_utils.extract_audio(filename[:-4], filename)
         audio = audio_utils.read_audio(fileName)
         audio_chunks = audio_utils.create_chunks(audio)
+        a_c = {'audio': audio_chunks}
+        upload_blob_from_memory(
+            'edaa_bucket',
+            contents= json.dumps(a_c, indent=4),
+            destination_blob_name= f'audio_chunks/{filename[:-4]}.json'
+        )
+        url_asr = 'http://localhost:8089:/predict'
+        make_post_call(url_asr, filename)
+
         
 
         #Create Video Chunks
         pool = Pool(processes=1) 
 
-        result = pool.apply_async(generate_video_chunks, [filename], )
+        result = pool.apply_async(generate_video_chunks, [filename], callback=make_yolo_post_call)
 
         return {'status':  True}
     except Exception as error:
         print(error)
         return {'status': False}
 
-def callback(event):
+def callback():
     print('Processed Video')
 
 
