@@ -1,17 +1,34 @@
 FROM python:3.8.2-slim-buster
+ENV PYENV_SHELL=/bin/bash
+ENV PATH="/root/miniconda3/bin:${PATH}"
+ARG PATH="/root/miniconda3/bin:${PATH}"
+RUN apt-get update && apt-get -y upgrade \
+  && apt-get install -y --no-install-recommends \
+    git \
+    wget \
+    g++ \
+    ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
 
+RUN wget \
+    https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh \
+    && mkdir /root/.conda \
+    && bash Miniconda3-latest-Linux-x86_64.sh -b \
+    && rm -f Miniconda3-latest-Linux-x86_64.sh 
+RUN conda --version
+RUN conda init bash
+RUN . /root/.bashrc
+RUN conda update conda
+RUN conda install -c conda-forge ffmpeg
 WORKDIR /code
 
-RUN apt-get update && apt-get -y upgrade && apt install -y wget
+
 
 COPY ./requirements.txt ./requirements.txt
 
 RUN pip install --no-cache-dir --upgrade -r ./requirements.txt
 
-RUN wget https://github.com/imageio/imageio-binaries/raw/master/ffmpeg/ffmpeg.linux64
-RUN mkdir ~/.imageio
-RUN mkdir ~/.imageio/ffmpeg/
-RUN mv ffmpeg.linux64 ~/.imageio/ffmpeg/ffmpeg-linux64-v3.3.1
+
 
 COPY . ./app
 

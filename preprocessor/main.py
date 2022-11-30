@@ -86,8 +86,8 @@ async def process_video(data: UploadFile = File(None)):
         #Extract audio and create Chunks
         audio_utils = audio.AudioTools('audio/')
         fileName = audio_utils.extract_audio(filename[:-4], filename)
-        audio = audio_utils.read_audio(fileName)
-        audio_chunks = audio_utils.create_chunks(audio)
+        audio_x = audio_utils.read_audio(fileName)
+        audio_chunks = audio_utils.create_chunks(audio_x)
         a_c = {'audio': audio_chunks}
         bucket.upload_blob_from_memory(
             'edaa_bucket',
