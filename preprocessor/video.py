@@ -32,13 +32,13 @@ def clip_video(filename,origintime,starttime,endtime,outputfilename):
         if counter>=startframe and counter<=endframe:  #check for range of output
             out1.write(frame)  #output 
 
-        key = cv2.waitKey(1) & 0xFF
+        #key = cv2.waitKey(1) & 0xFF
 
         counter+=1  #increase counter
 
     #release the output and cap  
     out1.release()
-    cv2.destroyAllWindows()
+    #cv2.destroyAllWindows()
 
 
 
@@ -113,11 +113,12 @@ def generate_video_chunks(filename):
         ret, frame = cap.read()       #read frame
         break
     title = "thumbnail/" + filename[:-4] + ".png"
+    cv2.imwrite("/code/app/"+title,frame)
     upload_blob(bucket_name, 
-            source_file_name= title,
+            source_file_name= "/code/app/"+title,
             destination_blob_name=title)
 
-    cv2.imwrite(title,frame)
+    
 
     origin="00:00:00"  
     starttimes, endtimes = divide_in_videos(filename)
@@ -125,11 +126,11 @@ def generate_video_chunks(filename):
     folder = filename[:-4]
     for starttime,endtime in zip(starttimes,endtimes):
         origintime=datetime.datetime.strptime(origin,"%H:%M:%S")
-        clip_video(filename,origintime,starttime,endtime,f'chunks/{filename[:-4]}_{count}_{count+10}.mp4')
+        clip_video(filename,origintime,starttime,endtime,f'/code/app/chunks/{filename[:-4]}_{count}_{count+10}.mp4')
         _filename = f'chunks/{filename[:-4]}_{count}_{count+10}.mp4'
         try:
             upload_blob(bucket_name, 
-            source_file_name= _filename,
+            source_file_name= "/code/app/"+_filename,
             destination_blob_name=_filename)
         except Exception as e:
             print(e)

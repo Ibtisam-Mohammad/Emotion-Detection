@@ -12,6 +12,7 @@ import moviepy.editor as mp
 import base64
 import glob
 import io
+import pickle
 import json
 from fastapi.responses import FileResponse
 from fastapi import FastAPI, Form,  File, UploadFile, Response
@@ -84,25 +85,27 @@ async def process_video(data: UploadFile = File(None)):
         f.write(array)
     try:
         #Extract audio and create Chunks
-        audio_utils = audio.AudioTools('audio/')
+        audio_utils = audio.AudioTools('/code/app/audio/')
         fileName = audio_utils.extract_audio(filename[:-4], filename)
         audio_x = audio_utils.read_audio(fileName)
         audio_chunks = audio_utils.create_chunks(audio_x)
         a_c = {'audio': audio_chunks}
         bucket.upload_blob_from_memory(
             'edaa_bucket',
-            contents= json.dumps(a_c, indent=4),
-            destination_blob_name= f'audio_chunks/{filename[:-4]}.json'
+            contents= pickle.dumps(a_c),
+            destination_blob_name= f'audio_chunks/{filename[:-4]}.pickle'
         )
         url_asr = 'http://localhost:8089:/predict'
-        make_post_call(url_asr, filename)
+        #make_post_call(url_asr, filename)
 
         
 
         #Create Video Chunks
-        pool = Pool(processes=1) 
-
-        result = pool.apply_async(video.generate_video_chunks, [filename], callback=make_yolo_post_call)
+        #pool = Pool(processes=1) 
+        print('Started creating chunks...............')
+        #result = pool.apply_async(video.generate_video_chunks, [filename], callback=make_yolo_post_call)
+        video.generate_video_chunks(filename)
+      
 
         return {'status':  True}
     except Exception as error:
