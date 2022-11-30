@@ -1,3 +1,0 @@
-docker run --rm -it --mount type=bind,source="E:\Projects\AI-5\Audio\OpenAI-ASR",target=/app asr_gpu
-
-docker run --rm -it -p 8089:80 --mount type=bind,source="E:\Projects\AI-5\Audio\OpenAI-ASR",target=/app asr_api
