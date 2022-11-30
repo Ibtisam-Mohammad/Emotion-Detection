@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-
+import Footer2 from "./Footer2";
 import "./pages/Analytics.css";
 import BarChart from "./BarChart"
 
@@ -39,7 +39,7 @@ function AnalyticsMeta(props) {
 
       <BarChart props={props.props} />
 
-      {/* <Footer2/> */}
+      <Footer2/>
     </div>
         </>
     )
