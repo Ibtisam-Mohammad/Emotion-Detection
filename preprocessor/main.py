@@ -57,15 +57,15 @@ def make_post_call(url, filename:str):
         print('Request Unsuccessful:', x.status_code)
 
 def make_yolo_post_call():
-    url = 'http://localhost:9000/predict_video'
+    url = 'http://yolo:9000/predict_video'
     json = {
         'filename':finalFileName
     }
     x = requests.post(url, json = json)
-    if x.status == 200:
+    if x.status_code == 200:
         print('Successfully Made Post Call')
     else:
-        print('Request Unsuccessful:', x.status)
+        print('Request Unsuccessful:', x.status_code)
 
 
 
@@ -105,6 +105,7 @@ async def process_video(data: UploadFile = File(None)):
         print('Started creating chunks...............')
         #result = pool.apply_async(video.generate_video_chunks, [filename], callback=make_yolo_post_call)
         video.generate_video_chunks(filename)
+        make_yolo_post_call()
       
 
         return {'status':  True}
