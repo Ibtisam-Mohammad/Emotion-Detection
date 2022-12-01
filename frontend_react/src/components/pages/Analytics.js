@@ -16,7 +16,7 @@ function Analytics(props) {
   const getData = async () => {
     const res = await axios({
       method: "post",
-      url: "http://127.0.0.1:80/results",
+      url: `${BASE_API_URL}/results`,
       data: { filename: location.state },
       headers: {
         "Content-Type": "application/json",
