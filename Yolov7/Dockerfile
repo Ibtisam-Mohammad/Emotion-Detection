@@ -33,5 +33,6 @@ RUN sudo apt-get install -y zip htop screen libgl1-mesa-glx
 RUN sudo apt-get install -y libglib2.0-0 libsm6 libxrender1 libxext6
 COPY . /app
 
-#ENTRYPOINT [ "python","subprocess_file.py" ]
-#CMD ["uvicorn", "subprocess_file:app", "--port", "80","--reload"]
+EXPOSE 9000
+
+CMD ["uvicorn", "subprocess_file:app", "--port", "9000","--host", "0.0.0.0","--reload"]
