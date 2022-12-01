@@ -5,6 +5,7 @@ import ResultItem from "./ResultItem";
 import axios from "axios";
 
 import "./Results.css";
+const BASE_API_URL = process.env.REACT_APP_BASE_API_URL;
 
 function Results() {
   const [data, setData] = useState([]);
@@ -12,7 +13,7 @@ function Results() {
   async function getResults() {
     let names = await axios({
       method: "get",
-      url: "http://127.0.0.1:80/result_names",
+      url: `${BASE_API_URL}/result_names`,
       headers: {
         "Content-Type": "application/json",
       },
