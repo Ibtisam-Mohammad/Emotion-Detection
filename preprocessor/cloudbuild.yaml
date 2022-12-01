@@ -1,0 +1,5 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [ 'build', '-t', 'us-west2-docker.pkg.dev/mercurial-snow-363512/preprocessor-repo/preprocessor-image:tag1', './preprocessor' ]
+images:
+  - 'us-west2-docker.pkg.dev/mercurial-snow-363512/preprocessor-repo/preprocessor-image:tag1'
