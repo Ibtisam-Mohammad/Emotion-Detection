@@ -1,0 +1,5 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [ 'build', '-t', 'us-west2-docker.pkg.dev/mercurial-snow-363512/yolo-repo/yolo-image:tag1', './Yolov7' ]
+images:
+  - 'us-west2-docker.pkg.dev/mercurial-snow-363512/yolo-repo/yolo-image:tag1'
