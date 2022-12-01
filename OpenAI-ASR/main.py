@@ -12,11 +12,23 @@ import base64
 import warnings
 # import torchaudio 
 import torch
-from utils.bucket_asr import download_blob_into_memory
 from utils import load_model, pad_or_trim, log_mel_spectrogram
 from utils import DecodingOptions
 from tqdm import tqdm
+from io import BytesIO
+from google.cloud import storage
+
 app = FastAPI()
+
+credential_path = "secrets/mercurial-snow.json"
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = credential_path
+storage_client = storage.Client.from_service_account_json("secrets/mercurial-snow.json")
+bucket = storage.Bucket(storage_client, 'edaa_bucket')
+def download_blob_into_memory(blob_name):
+    blob = bucket.blob(blob_name)
+    contents = blob.download_as_string()
+    return contents
+
 
 #Checking available ceces 
 DEVICE = "cpu" # if torch.cuda.is_available() else "cpu"
@@ -63,8 +75,10 @@ model, options = loadModel('base.en')
 @app.post('/predict')
 async def predict(data: Item = None):
     filename = data.filename
-    f = download_blob_into_memory(blob_name='audio_chunks/'+filename+'.json')
-    chunks = json.loads(f)
+    print(filename)
+    f = download_blob_into_memory(blob_name='audio_chunks/'+filename+'.pickle')
+    chunks = pickle.loads(f)
+    chunks= chunks["audio"]
     texts=[]
     for chunk in chunks:
         chunk = np.array(chunk,dtype='float32')
@@ -78,12 +92,12 @@ async def predict(data: Item = None):
         "filename":filename
     }
     print('.........................................',upload)
-    make_asr_call(upload)
+    make_sbert_call(upload)
     return {'stat':'forwarded to bert'}
 
 # TO ADD BERT API CALL
-def make_asr_call(obj):
-    url = 'http://try:8081/predict'
+def make_sbert_call(obj):
+    url = 'http://sbert:8003/predict'
     x = requests.post(url, json = obj)
     if x.status_code == 200:
         print('Successfully Made Bert Call')

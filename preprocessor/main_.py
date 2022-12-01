@@ -1,12 +1,12 @@
 import imageio
 import sys
 # sys.path.append("./")
-import app.video as video
+import video as video
 from multiprocessing import Pool
-import app.bucket as bucket
+import bucket as bucket
 import requests
 from pydantic import BaseModel
-import app.audio as audio
+import audio as audio
 from google.cloud import storage
 import moviepy.editor as mp 
 import base64
@@ -51,10 +51,10 @@ def make_post_call(url, filename:str):
         'filename':filename[:-4]
     }
     x = requests.post(url, json = json)
-    if x.status_code == 200:
+    if x.status == 200:
         print('Successfully Made Post Call')
     else:
-        print('Request Unsuccessful:', x.status_code)
+        print('Request Unsuccessful:', x.status)
 
 def make_yolo_post_call():
     url = 'http://localhost:9000/predict_video'
@@ -95,8 +95,8 @@ async def process_video(data: UploadFile = File(None)):
             contents= pickle.dumps(a_c),
             destination_blob_name= f'audio_chunks/{filename[:-4]}.pickle'
         )
-        url_asr = 'http://asr:8080/predict'
-        make_post_call(url_asr, filename)
+        url_asr = 'http://asr:8010/predict'
+        #make_post_call(url_asr, filename)
 
         
 

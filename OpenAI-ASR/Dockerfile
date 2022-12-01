@@ -16,8 +16,6 @@ RUN pip install -r requirements.txt
 
 COPY . /app
 
-<<<<<<< HEAD
-CMD ["uvicorn", "main:app","--port","8080","--host","127.0.0.1","--reload"]
-=======
-CMD ["uvicorn", "main:app","--reload"]
->>>>>>> 53d5e78f3e61168a9b1f70aa4fbe13c5e070adb5
+EXPOSE 8080
+CMD ["uvicorn", "main:app","--port","8080","--host","0.0.0.0","--reload"]
+

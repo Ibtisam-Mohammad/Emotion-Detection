@@ -1,0 +1,5 @@
+docker network create trial
+
+docker run --rm -it -p 8080:8080 --mount type=bind,source="D:\Yolov7\YOLO\New folder\Backend\OpenAI-ASR",target=/code --name asr --network trial asr
+
+docker run --rm -it -p 8081:8081 --mount type=bind,source="C:\Users\admin\Desktop\TRY",target=/code --name try --network trial try

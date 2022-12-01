@@ -2,10 +2,10 @@ import io
 from io import BytesIO
 from google.cloud import storage
 import os
-credential_path = "mercurial-snow-363512-e9e8f3cce621.json"
+credential_path = "secrets/mercurial-snow.json"
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = credential_path
 
-storage_client = storage.Client.from_service_account_json(credential_path)
+storage_client = storage.Client.from_service_account_json("secrets/mercurial-snow.json")
 bucket = storage.Bucket(storage_client, 'edaa_bucket')
 
 def list_blobs(folder='chunks/'):
