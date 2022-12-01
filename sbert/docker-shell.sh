@@ -10,4 +10,4 @@ docker network inspect app-network >/dev/null 2>&1 || docker network create app-
 docker build -t sbert .
 
 # Run the container
-docker run --rm -it -p 8003:8003 --network app-network --mount type=bind,source="%cd%",target=/code/app --name sbert sbert
+sudo docker run --rm -it -d -p 8003:8003 --network app-network --mount type=bind,source="$(pwd)",target=/code/app --name sbert sbert

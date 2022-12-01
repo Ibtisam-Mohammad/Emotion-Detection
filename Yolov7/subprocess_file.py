@@ -16,23 +16,6 @@ from bucket import download_blob, list_blobs, upload_blob,upload_blob_from_memor
 
 app = FastAPI()
 
-# origins = [
-#     "http://localhost.tiangolo.com",
-#     "https://localhost.tiangolo.com",
-#     "http://127.0.0.1",
-#     "http://localhost:3000",
-#     "http://localhost:8080",
-#     "*",
-# ]
-
-# app.add_middleware(
-#     CORSMiddleware,
-#     allow_origins=origins,
-#     allow_credentials=True,
-#     allow_methods=["*"],
-#     allow_headers=["*"],
-# )
-
 
 class Item(BaseModel):
     filename: str
@@ -41,6 +24,7 @@ class Item(BaseModel):
 async def predict(data: Item = None):
     dir_={}
     list_of_files = list_blobs()
+    length_ = len(list_of_files)
     print(list_of_files) ###['chunks/talking_dog_0_10.mp4', 'chunks/talking_dog_10_20.mp4',....]
     file_name = data.filename
     print(file_name)#### 'talking_dog'
@@ -87,12 +71,12 @@ async def predict(data: Item = None):
     dir_ = json.dumps(dir_, indent=2).encode('utf-8')
     upload_blob_from_memory('edaa_bucket', dir_, f'results/video_{file_name}.json')
 
-# shutil.rmtree('video_data/output_frames/')
-# os.mkdir('video_data/output_frames/')
-# shutil.rmtree('video_data/output_faces/')
-# os.mkdir('video_data/output_faces/')
-# shutil.rmtree('video_data/output_emotions/')
-# os.mkdir('video_data/output_emotions/')
-# shutil.rmtree('video_data/input_dir/')
-# os.mkdir('video_data/input_dir/')
+    shutil.rmtree('video_data/output_frames/')
+    os.mkdir('video_data/output_frames/')
+    shutil.rmtree('video_data/output_faces/')
+    os.mkdir('video_data/output_faces/')
+    shutil.rmtree('video_data/output_emotions/')
+    os.mkdir('video_data/output_emotions/')
+    shutil.rmtree('video_data/input_dir/')
+    os.mkdir('video_data/input_dir/')
 

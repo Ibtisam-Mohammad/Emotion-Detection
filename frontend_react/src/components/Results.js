@@ -26,7 +26,7 @@ function Results() {
     for (var key in names) {
       const image = await await axios({
         method: "post",
-        url: "http://127.0.0.1:80/get_thumbnail",
+        url: `${BASE_API_URL}/get_thumbnail`,
         data: { filename: names[key]["image_name"] },
         headers: {
           "Content-Type": "application/json",
