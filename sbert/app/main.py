@@ -1,17 +1,18 @@
-try:
-    from utils.text import *
-    from utils.bucket import *
+# try:
+#     from utils.text import *
+#     from utils.bucket import *
 
-except:
-    from .utils.text import *
-    from .utils.bucket import *
+# except:
+#     from .utils.text import *
+#     from .utils.bucket import *
 
 
 from fastapi import FastAPI, Form,  File, UploadFile, Body
 from typing import Any, Dict, AnyStr, List, Union
 import numpy as np
 from pydantic import BaseModel
-
+import app.app.bucket as bucket
+import app.app.text as text
 import json
 
 
@@ -24,7 +25,7 @@ class Item(BaseModel):
 
 app = FastAPI()
 
-model = import_model()
+model = text.import_model()
 
 @app.get("/")
 async def root():
@@ -33,7 +34,7 @@ async def root():
 @app.post('/predict')
 async def predict(data: Item = None):
     sentences = data.sentences
-    dataset = encode_examples(sentences).batch(1)
+    dataset = text.encode_examples(sentences).batch(1)
     predictions = model.predict(dataset)
     mapping = {0:'negative', 1:'neutral', 2:'positive'}
     print(predictions)
@@ -57,7 +58,7 @@ async def predict(data: Item = None):
     json_file = json.dumps(upload, indent=2).encode('utf-8')
 
     try:
-        upload_blob_from_memory(bucket_name, 
+        bucket.upload_blob_from_memory(bucket_name, 
         contents= json_file,
         destination_blob_name=f'results/audio_{data.filename}.json')
     except Exception as e:
