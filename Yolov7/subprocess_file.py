@@ -71,12 +71,29 @@ async def predict(data: Item = None):
     dir_ = json.dumps(dir_, indent=2).encode('utf-8')
     upload_blob_from_memory('edaa_bucket', dir_, f'results/video_{file_name}.json')
 
-    shutil.rmtree('video_data/output_frames/')
+    try:
+        shutil.rmtree('video_data/output_frames/')
+    except:
+        print("No output_frames")
     os.mkdir('video_data/output_frames/')
-    shutil.rmtree('video_data/output_faces/')
+
+    try:
+        shutil.rmtree('video_data/output_faces/')
+    except:
+        print("No output_faces")
     os.mkdir('video_data/output_faces/')
-    shutil.rmtree('video_data/output_emotions/')
+
+    try:
+        shutil.rmtree('video_data/output_emotions/')
+    except:
+        print("No output_emotions")
     os.mkdir('video_data/output_emotions/')
-    shutil.rmtree('video_data/input_dir/')
+
+    try:
+        shutil.rmtree('video_data/input_dir/')
+    except:
+        print("No input_dir")
     os.mkdir('video_data/input_dir/')
+
+    print("Check your bucket for results")
 
