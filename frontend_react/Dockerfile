@@ -1,8 +1,8 @@
 # Fetching the latest node image on apline linux
-FROM node:alpine AS development
+FROM node:alpine AS production
 
 # Declaring env
-ENV NODE_ENV development
+ENV NODE_ENV production
 
 # Setting up the work directory
 WORKDIR /react-app

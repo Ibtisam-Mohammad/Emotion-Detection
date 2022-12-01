@@ -34,4 +34,4 @@ COPY . ./app
 
 EXPOSE 8005
 
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port" ,"8005", "--reload"]
+CMD ["uvicorn", "--timeout-keep-alive", "60000", "app.main:app", "--host", "0.0.0.0", "--port" ,"8005", "--reload"]

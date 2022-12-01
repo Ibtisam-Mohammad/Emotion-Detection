@@ -5,7 +5,7 @@ import BarChart from "../BarChart";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import AnalyticsMeta from "../AnalyticsMeta";
-
+const BASE_API_URL = process.env.REACT_APP_BASE_API_URL
 function Analytics(props) {
   const location = useLocation();
   const [analytics_data, setDataAn] = useState({});
