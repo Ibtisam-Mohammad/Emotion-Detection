@@ -63,5 +63,5 @@ The results look something like this :</br>
     "negative": 35</br>
   }</br>
   
- The above results are taken back to the protend and we use plotly.js to make plots.
+ The above results are taken back to the frontend and we use plotly.js to make plots.
  
