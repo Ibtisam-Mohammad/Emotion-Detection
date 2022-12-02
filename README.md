@@ -1,8 +1,8 @@
-# FinalSubmissionAI5
+# EDAA
 
 Hello everyone,
 
-This repository contains the EDAA app. EDAA stands for Emotion Detection and Analysis. It is a web application which will create a report of audience reactions. We take into consideration, video (facial expressions of the audience) and text (context of the speech) data. This app will help public speakers improve their speech. Please read more about our app in the about section of our [web app](http://34.102.62.14/about). 
+This repository contains the EDAA app. EDAA stands for Emotion Detection and Analysis. It is a web application which will create a report of audience reactions. We take into consideration, video (facial expressions of the audience) and text (context of the speech) data. This app will help public speakers improve their speech. Please read more about our app in the about section of our web app. 
 
 The following is a diagram of the architecture of our web app:
 ![img](https://github.com/aamir09/FinalSubmissionAI5/blob/main/webapp_architecture.PNG "webapp_architecture.PNG")
@@ -65,3 +65,11 @@ The results look something like this :</br>
   
  The above results are taken back to the frontend and we use plotly.js to make plots.
  
+# Deployment instructions
+
+- Pull the above repository to your local machine
+- change the directory to frontend_react and run the docker-shell.sh file.
+'''
+cd frontend_react
+sh docker-shell.sh
+'''
