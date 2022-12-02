@@ -17,7 +17,7 @@ These sentences are analysed using [SBert](https://github.com/aamir09/FinalSubmi
 The sbert container predicts the sentiment of the model and saves the audio predictions to the GCS bucket.
 Here is a screenshot of the bucket to get a basic idea of the structure.
 ![img](https://github.com/aamir09/FinalSubmissionAI5/blob/main/GCS_bucket.jpeg)
-The results look something like this :
+The results look something like this :</br>
 { <br/>
   "0_10": { <br/>
     "sentence": "I'm goin", <br/>
@@ -44,3 +44,24 @@ The key of the dictionary specify the start and the stop time, i.e. the interval
 - start - start time
 - stop - stop time
 
+Similarly the video chunks are created by the preprocessor and given as input to the [yolo container](https://github.com/aamir09/FinalSubmissionAI5/tree/main/Yolov7).
+The results look something like this :</br>
+{</br>
+  "50_60": {</br>
+    "positive": 2,</br>
+    "neutral": 0,</br>
+    "negative": 39</br>
+  },</br>
+  "20_30": {</br>
+    "positive": 1,</br>
+    "neutral": 2,</br>
+    "negative": 45</br>
+  },</br>
+  "10_20": {</br>
+    "positive": 1,</br>
+    "neutral": 0,</br>
+    "negative": 35</br>
+  }</br>
+  
+ The above results are taken back to the protend and we use plotly.js to make plots.
+ 
