@@ -69,7 +69,7 @@ The results look something like this :</br>
 
 - Pull the above repository to your local machine
 - change the directory to frontend_react and run the docker-shell.sh file.
-'''
+~~~
 cd frontend_react
 sh docker-shell.sh
-'''
+~~~
