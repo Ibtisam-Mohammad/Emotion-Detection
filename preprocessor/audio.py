@@ -1,4 +1,5 @@
 import moviepy.editor as mp 
+import torchaudio
 import scipy
 from math import ceil
 import numpy as np
@@ -21,8 +22,8 @@ class AudioTools():
         return video
 
     def read_audio(self, path):
-        rate, wav = scipy.io.wavfile.read(path)
-        return wav
+        audio, samplingRate = torchaudio.load(path)
+        return audio
 
 
     def create_chunks(self, audio):
@@ -34,14 +35,14 @@ class AudioTools():
         start = 0
         stop = CHUNK_SIZE * SAMPLING_RATE
 
-        chunks_total = ceil(audio.shape[0] / stop)
+        chunks_total = ceil(audio.shape[1] / stop)
 
         # print(chunks_total)
 
         initial = 1
 
         while initial <= chunks_total:
-            chunk = audio[start:stop, :]
+            chunk = audio[:,start:stop]
             chunks.append(chunk)
             start = stop 
             initial+=1

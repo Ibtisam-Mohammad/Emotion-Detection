@@ -41,9 +41,9 @@ def preprocess(file, device=DEVICE):
     :return:
     """
     #Loading the audio file
-    audio = torch.from_numpy(file)
+    #audio = torch.from_numpy(file)
     # audio, samplingRate = torchaudio.load(file)
-    # audio = audio
+    audio = file
 
     #Pre-processing of the audio file
     audio = pad_or_trim(audio.flatten()).to(DEVICE)
@@ -81,7 +81,7 @@ async def predict(data: Item = None):
     chunks= chunks["audio"]
     texts=[]
     for chunk in chunks:
-        chunk = np.array(chunk,dtype='float32')
+        #chunk = np.array(chunk,dtype='float32')
         mel = preprocess(chunk)
         text = model.decode(mel, options)
         text=text.text

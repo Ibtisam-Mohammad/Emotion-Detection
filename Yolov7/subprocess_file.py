@@ -39,7 +39,7 @@ async def predict(data: Item = None):
         save_frame(path, "video_data/output_frames", gap=25)
         folder_name=path.split('/')[-1].split('.')[0]   # use ('\\') on Windows
         print('PATH:',path,'\n',folder_name)
-        detect(weights='weights/face.pt',source='video_data/output_frames/'+folder_name,img_size=640,conf_thres=0.90,device='cpu',view_img=False,\
+        detect(weights='weights/face.pt',source='video_data/output_frames/'+folder_name,img_size=640,conf_thres=0.70,device='cpu',view_img=False,\
             save_txt=False,save_conf=False,save_crop=True,\
                 project='video_data/output_faces', name=folder_name,\
                 no_trace=True, classes = [0])
@@ -64,7 +64,7 @@ async def predict(data: Item = None):
         output = {
                 'positive':positive,
                 'neutral':neutral,
-                'negative':negative
+                'negative':negative//10
                 }
         upload_name =  '_'.join(folder_name.split('_')[-2:])
         dir_[upload_name]=output

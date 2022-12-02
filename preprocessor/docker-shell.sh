@@ -4,11 +4,11 @@
 set -e
 
 # Create a network
-docker network inspect app-network >/dev/null 2>&1 || docker network create app-network
+sudo docker network inspect app-network >/dev/null 2>&1 || sudo docker network create app-network
 
 # Build the image based on the Dockerfile
-docker build -t preprocessor .
+sudo docker build -t preprocessor .
 
 # Run the container
-docker run --rm -it -p 8005:8005 --network app-network --mount type=bind,source="%cd%",target=/code/app --name preprocessor preprocessor
+sudo docker run --rm -d -p 8005:8005 --network app-network --mount type=bind,source="$(pwd)",target=/code/app --name preprocessor preprocessor
 
