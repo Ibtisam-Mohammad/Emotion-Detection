@@ -44,7 +44,7 @@ The key of the dictionary specify the start and the stop time, i.e. the interval
 - start - start time
 - stop - stop time
 
-Similarly the video chunks are created by the preprocessor and given as input to the [yolo container](https://github.com/aamir09/FinalSubmissionAI5/tree/main/Yolov7).
+Similarly the video chunks are created by the preprocessor and uploaded to GCS bucket. The yolo container takes these chunks as input to the [yolo container](https://github.com/aamir09/FinalSubmissionAI5/tree/main/Yolov7).
 The results look something like this :</br>
 {</br>
   "50_60": {</br>
