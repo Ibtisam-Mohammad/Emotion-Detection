@@ -10,4 +10,4 @@ sudo docker network inspect app-network >/dev/null 2>&1 || docker network create
 sudo docker build -t frontend .
 
 # Run the container
-sudo docker run -it --rm --name frontend -p 3000:3000 --mount type=bind,source="$(pwd)",target=/react_app --network app-network frontend
+sudo docker run -it --rm -d --name frontend -p 3000:3000 --mount type=bind,source="$(pwd)",target=/react_app --network app-network frontend
