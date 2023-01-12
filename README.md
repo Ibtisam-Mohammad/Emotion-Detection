@@ -4,7 +4,7 @@ Hello everyone,
 
 This repository contains the EDAA app. EDAA stands for Emotion Detection and Analysis. It is a web application which will create a report of audience reactions. We take into consideration, video (facial expressions of the audience) and text (context of the speech) data. This app will help public speakers improve their speech. Please read more about our app in the about section of our web app. 
 
-[Link](https://drive.google.com/drive/u/0/folders/1Ow_emtUq4HrBZl4tBrNhHMfFFYVrdc6X) to the drive for presentation and slides
+[Link](https://youtu.be/G5-u3YE2TSQ?t=933) to the presentation on youtube
 
 The following is a diagram of the architecture of our web app:
 ![img](https://github.com/aamir09/FinalSubmissionAI5/blob/main/webapp_architecture.PNG "webapp_architecture.PNG")
