@@ -19,27 +19,29 @@ These sentences are analysed using [SBert](https://github.com/aamir09/FinalSubmi
 The sbert container predicts the sentiment of the model and saves the audio predictions to the GCS bucket.
 Here is a screenshot of the bucket to get a basic idea of the structure.
 ![img](https://github.com/aamir09/FinalSubmissionAI5/blob/main/GCS_bucket.jpeg)
-The results look something like this :</br>
-'{ <br/>
-  "0_10": { <br/>
-    "sentence": "I'm goin", <br/>
-    "prediction": "negative", <br/>
-    "start": 0, <br/>
-    "stop": 10 <br/>
-  }', <br/>
-  "10_20": { <br/>
-    "sentence": "to go to the museum", <br/>
-    "prediction": "neutral", <br/>
-    "start": 10, <br/>
-    "stop": 20 <br/>
-  }, <br/>
-  "20_30": { <br/>
-    "sentence": "Good Bye", <br/>
-    "prediction": "neutral", <br/>
-    "start": 20, <br/>
-    "stop": 30<br/>
-  } <br/>
-} <br/>
+The results look something like this :
+```json
+{ 
+  "0_10": { 
+    "sentence": "I'm goin", 
+    "prediction": "negative", 
+    "start": 0, 
+    "stop": 10 
+  }, 
+  "10_20": { 
+    "sentence": "to go to the museum", 
+    "prediction": "neutral", 
+    "start": 10, 
+    "stop": 20 
+  }, 
+  "20_30": { 
+    "sentence": "Good Bye", 
+    "prediction": "neutral",
+    "start": 20, 
+    "stop": 30
+  } 
+}
+```
 The key of the dictionary specify the start and the stop time, i.e. the interval. the value is a dictionay which has the the following information :
 - sentence - this has been predicted by the asr model when the input audio chunk is given as input.
 - prediction - this has been predicted by the sentence bert model when the sentence is given as input.
@@ -47,23 +49,26 @@ The key of the dictionary specify the start and the stop time, i.e. the interval
 - stop - stop time
 
 Similarly the video chunks are created by the preprocessor and uploaded to GCS bucket. The yolo container takes these chunks as input to the [yolo container](https://github.com/aamir09/FinalSubmissionAI5/tree/main/Yolov7).
-The results look something like this :</br>
-{</br>
-  "50_60": {</br>
-    "positive": 2,</br>
-    "neutral": 0,</br>
-    "negative": 39</br>
-  },</br>
-  "20_30": {</br>
-    "positive": 1,</br>
-    "neutral": 2,</br>
-    "negative": 45</br>
-  },</br>
-  "10_20": {</br>
-    "positive": 1,</br>
-    "neutral": 0,</br>
-    "negative": 35</br>
-  }</br>
+The results look something like this : </br>
+```json
+{
+  "50_60": {
+    	"positive": 2,
+  	"neutral": 0,
+ 	"negative": 39
+  	}, 
+  "20_30": {
+	"positive": 1,
+	"neutral": 2,
+	"negative": 45
+	},
+   "10_20": {
+    	"positive": 1,
+    	"neutral": 0,
+    	"negative": 35
+  	}
+}
+``` 
   
  The above results are taken back to the frontend and we use plotly.js to make plots.
  
