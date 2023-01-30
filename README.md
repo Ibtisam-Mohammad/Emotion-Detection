@@ -20,13 +20,13 @@ The sbert container predicts the sentiment of the model and saves the audio pred
 Here is a screenshot of the bucket to get a basic idea of the structure.
 ![img](https://github.com/aamir09/FinalSubmissionAI5/blob/main/GCS_bucket.jpeg)
 The results look something like this :</br>
-{ <br/>
+'{ <br/>
   "0_10": { <br/>
     "sentence": "I'm goin", <br/>
     "prediction": "negative", <br/>
     "start": 0, <br/>
     "stop": 10 <br/>
-  }, <br/>
+  }', <br/>
   "10_20": { <br/>
     "sentence": "to go to the museum", <br/>
     "prediction": "neutral", <br/>
